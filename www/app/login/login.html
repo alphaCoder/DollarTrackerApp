@@ -1,8 +1,6 @@
-<div class="ionic">
+<div class="ionic" ng-controller="loginCtrl">
     <div class="bar bar-header bar-balanced">
-        <a ui-sref="home" class="button icon-left ion-chevron-left button-balanced"></a>
-
-        <div class="h1 title">Please provide your credentials</div>
+        <div class="h1 title">Login</div>
     </div>
     <div class="content has-header">
         <div class="list">
@@ -14,11 +12,11 @@
             </label>
         </div>
         <div class="padding">
-            <button class="button button-block button-positive">Go</button>
+            <button class="button button-block button-positive" ng-click="submit()">Login</button>
         </div>
-        <div class="padding">
-            <a ui-sref="forgotPassword">Forgot Password</a>
-            <br/> Don't have an account? <a ui-sref="account">Create one</a>
+        <div class="padding row">
+            <a ui-sref="forgotPassword" class="col text-left">Forgot Password</a>
+            <a  ui-sref="account" class="col text-right">Join now</a>
         </div>
     </div>
 </div>

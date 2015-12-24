@@ -1,4 +1,4 @@
-angular.module('DollarTrackerApp', ['ionic'])
+angular.module('DollarTrackerApp', ['ionic','ionic.utils','satellizer'])
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -32,7 +32,8 @@ angular.module('DollarTrackerApp', ['ionic'])
         });
     })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$authProvider', 
+         function ($stateProvider, $urlRouterProvider,$httpProvider, $authProvider) {
     $stateProvider
 
         .state('app', {
@@ -42,7 +43,8 @@ angular.module('DollarTrackerApp', ['ionic'])
         })
         .state('login', {
             url: "/login",
-            templateUrl: "app/login/login.html"
+            templateUrl: "app/login/login.html",
+            controller:"loginCtrl"
         })
         .state('home', {
             url: "/home",
@@ -52,7 +54,18 @@ angular.module('DollarTrackerApp', ['ionic'])
             url: "/account",
             templateUrl: "app/account/account.html"
         })
+    var API_URL = 'api/';
+    $authProvider.apiServer = API_URL;
+    $authProvider.loginUrl = API_URL + 'login';
+    $authProvider.signupUrl = API_URL + 'account';
+    $authProvider.loginRedirect = '/home';
+    $authProvider.logoutRedirect = '/login';
+    $authProvider.httpInterceptor = true;
+    $authProvider.signupRedirect = '/login';
+    $authProvider.loginOnSignup = false;
+    $authProvider.storageType = 'localStorage';
 
-
-    $urlRouterProvider.otherwise('home');
-})
+    $httpProvider.interceptors.push('authInterceptor');
+//    $urlRouterProvider.otherwise('login');
+    
+}])
