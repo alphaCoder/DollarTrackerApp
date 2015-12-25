@@ -1,4 +1,4 @@
-angular.module('DollarTrackerApp', ['ionic','ionic.utils','satellizer'])
+angular.module('DollarTrackerApp', ['ionic','ionic.utils','satellizer', 'ngCordova','ngFileUpload'])
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -43,29 +43,30 @@ angular.module('DollarTrackerApp', ['ionic','ionic.utils','satellizer'])
         })
         .state('login', {
             url: "/login",
-            templateUrl: "app/login/login.html",
-            controller:"loginCtrl"
-        })
+            templateUrl: "app/login/login.html"
+    })
         .state('home', {
             url: "/home",
-            templateUrl: "app/home/home.html"
+            templateUrl: "app/home/home.html",
+            controller:"homeCtrl"
         })
         .state('account', {
             url: "/account",
             templateUrl: "app/account/account.html"
         })
-    var API_URL = 'api/';
+    var API_URL = 'http://dev-dollartracker.azurewebsites.net/api/';
     $authProvider.apiServer = API_URL;
     $authProvider.loginUrl = API_URL + 'login';
     $authProvider.signupUrl = API_URL + 'account';
     $authProvider.loginRedirect = '/home';
     $authProvider.logoutRedirect = '/login';
-    $authProvider.httpInterceptor = true;
     $authProvider.signupRedirect = '/login';
     $authProvider.loginOnSignup = false;
     $authProvider.storageType = 'localStorage';
-
+    $authProvider.withCredentials = false;
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.withCredentials = true;
+    delete $httpProvider.defaults.headers.common["X-Requested-With"];
     $httpProvider.interceptors.push('authInterceptor');
-//    $urlRouterProvider.otherwise('login');
-    
+    $urlRouterProvider.otherwise("login");
 }])

@@ -8,7 +8,9 @@
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
+    <script>
+        var dollarTrackerAppName = "DollarTrackerApp";
+    </script>
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
@@ -17,6 +19,7 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
@@ -26,7 +29,11 @@
     <script src="app/login/login.ctrl.js"></script>
    <script src="app/utils/ionic.utils.js"></script>
     <script src="app/common/authInterceptor.js"></script>
-
+    <script src="app/common/user.service.js"></script>
+    <script src="lib/ng-file-upload/ng-file-upload.js"></script>
+    <script src="app/home/dashboard.service.js"></script>
+    <script src="app/home/home.ctrl.js"></script>
+    <script src="app/common/api.service.js"></script>
 </head>
 
 <body ng-app="DollarTrackerApp">
