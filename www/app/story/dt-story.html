@@ -1,0 +1,62 @@
+<div class="ionic">
+	
+    
+    
+ 
+  <div class="content has-header">
+	    
+    	<ion-list>
+	      <div ng-repeat="group in stories track by $index">
+	        <!--Accordion start-->
+	        <ion-item class="item-stable" ng-click="toggleGroup(group,$index)" ng-class="{active: isGroupShown(group)}">
+	          <i class="icon calm" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i> &nbsp; <span class="calm"> {{group.name}}</span>
+	        </ion-item>
+	        <!--Accordion content start-->
+	        <ion-item class="item-accordion"  ng-show="isGroupShown(group)">
+		        <ion-list can-swipe="true"><!--story.expenses-->
+				    <div class="card" ng-repeat="item in group.expenses track by $index" ng-show="isGroupShown(group)" style="margin-top:5px;margin-bottom:0px;">
+				    	<ion-item style="height:105px">
+							<dt-card></dt-card>
+							<ion-option-button class="button-assertive icon ion-edit" ng-click="modal.show(); setDataModal($index)"></ion-option-button>
+				        	<ion-option-button class="button-light icon ion-trash-a" ng-click="removeData($index)"></ion-option-button>
+						</ion-item>
+					</div>
+				</ion-list>
+	        </ion-item>
+	        <!--Accordion content end-->
+	        <!--Accordion end-->
+	      </div>
+	    </ion-list>
+	    
+  </div>
+</div>
+
+<script id="templates/modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-calm">
+          <h1 class="title">Edit Expense</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Date</span>
+              <input ng-model="obj.modalDate" type="text">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Place</span>
+              <input ng-model="obj.modalPlace" type="text">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Amount</span>
+              <input ng-model="obj.modalAmount" type="text">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Comment</span>
+              <input ng-model="obj.modalComment" type="text">
+            </label>
+            <button class="button button-full button-calm" ng-click="saveItem(obj)">Save</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+</script>
