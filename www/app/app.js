@@ -1,5 +1,5 @@
-angular.module('DollarTrackerApp', ['ionic','ionic.utils','satellizer', 'ngCordova','ngFileUpload'])
-    .run(function ($ionicPlatform) {
+angular.module('DollarTrackerApp', ['ui.router','ionic','ionic.utils','satellizer', 'ngCordova','ngFileUpload'])
+    .run(function ($ionicPlatform, $state) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -35,25 +35,52 @@ angular.module('DollarTrackerApp', ['ionic','ionic.utils','satellizer', 'ngCordo
 .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$authProvider', 
          function ($stateProvider, $urlRouterProvider,$httpProvider, $authProvider) {
     $stateProvider
-
+        .state('tabs', {
+          url: "/tab",
+          abstract: true,
+          templateUrl: "app/footer/dt-footer.html"
+        })
+        .state('tabs.story', {
+          url: "/story",
+          views: {
+            'story-tab': {
+              templateUrl: "app/story/dt-story.html",
+              controller: 'storyCtrl'
+            }
+          }
+        })
+        .state('tabs.home', {
+          url: "/home",
+          views: {
+            'home-tab': {
+              templateUrl: "app/home/dt-home.html",
+              controller: 'homeCtrl'
+            }
+          }
+        })
+        .state('tabs.about', {
+          url: "/about",
+          views: {
+            'about-tab': {
+              templateUrl: "app/about/dt-about.html",
+            }
+          }
+        })
         .state('app', {
-            //             abstract: true,
             url: "/app",
             templateUrl: "app/layout/menu-layout.html"
         })
         .state('login', {
             url: "/login",
             templateUrl: "app/login/login.html"
-    })
-        .state('home', {
-            url: "/home",
-            templateUrl: "app/home/home.html",
-            controller:"homeCtrl"
-        })
+        })    
+
         .state('account', {
             url: "/account",
             templateUrl: "app/account/account.html"
-        })
+        });
+        
+        $urlRouterProvider.otherwise("/tab/home");
     var API_URL = 'http://dev-dollartracker.azurewebsites.net/api/';
     $authProvider.apiServer = API_URL;
     $authProvider.loginUrl = API_URL + 'login';
@@ -69,4 +96,22 @@ angular.module('DollarTrackerApp', ['ionic','ionic.utils','satellizer', 'ngCordo
     delete $httpProvider.defaults.headers.common["X-Requested-With"];
     $httpProvider.interceptors.push('authInterceptor');
     $urlRouterProvider.otherwise("login");
-}])
+}]);
+
+(function() {
+    angular.module(dollarTrackerAppName)
+    .controller('mainCtrl', ['$scope','$ionicModal', mainCtrl]);
+    function mainCtrl($scope,$ionicModal) {
+        $ionicModal.fromTemplateUrl('templates/modal.html', {
+            scope: $scope
+          }).then(function(modal) {
+            $scope.modal = modal;
+          });
+          
+          $scope.createContact = function(u) {        
+            $scope.items.push({ name: u.itemName });
+            $scope.modal.hide();
+          };
+    }
+
+})();

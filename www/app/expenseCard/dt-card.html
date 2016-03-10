@@ -1,0 +1,18 @@
+
+  <div class="item item-divider item-icon-left calm" style="padding-bottom:0px;">
+    <i class="icon ion-{{item.category}} "></i>
+    <span class="">{{item.date}}</span>
+    <span style="float:right;" class="">{{item.amount | currency:"$"}}</span>
+  </div>
+  <div class="item item-text-wrap" style="padding-bottom:0px;padding-top:5px;">
+    <div>
+      <h2>
+        <span>{{item.place}}</span>
+        <img  style="float:right;" class="item item-image" src="receipt.jpg">
+      </h2>
+    </div>
+    <div>
+      <h4>{{item.comment}}</h4>
+    </div>
+  </div>
+  

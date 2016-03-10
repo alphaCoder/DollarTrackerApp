@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="DollarTrackerApp" >
 
 <head>
     <meta charset="utf-8">
@@ -25,14 +25,22 @@
     <!-- your app's js -->
     <script src="lib/satellizer/satellizer.min.js"></script>
     <script src="app/app.js"></script>
-    <script src="app/footer/signedInFooter.directive.js"></script>
+
+    <script src="app/footer/dt-footer.directive.js"></script>
+    <script src="app/expenseCard/dt-card.directive.js"></script>
+    <script src="app/storyAccordion/dt-accordion.directive.js"></script>
+    <script src="app/storyAccordion/dt-accordion-ctrl.js"></script>
+
     <script src="app/login/login.ctrl.js"></script>
    <script src="app/utils/ionic.utils.js"></script>
     <script src="app/common/authInterceptor.js"></script>
     <script src="app/common/user.service.js"></script>
     <script src="lib/ng-file-upload/ng-file-upload.js"></script>
     <script src="app/home/dashboard.service.js"></script>
-    <script src="app/home/home.ctrl.js"></script>
+
+    <script src="app/home/dt-home.ctrl.js"></script>
+    <script src="app/story/dt-story.ctrl.js"></script>
+
     <script src="app/common/api.service.js"></script>
     <script src="lib/d3/d3.min.js"></script>
     <script src="lib/nvd3/build/nv.d3.min.js"></script>
@@ -44,8 +52,16 @@
     <script src="app/expenseStoryList/expenseStoryList.route.js"></script>
 </head>
 
-<body ng-app="DollarTrackerApp">
+<body ng-controller="mainCtrl">
     <ion-nav-view></ion-nav-view>
+    <div class="bar bar-header bar-calm">
+        <div class="h1 title">Dollar Tracker</div>
+            <div class="buttons">
+                <button class="button button-icon ion-compose" ng-click="modal.show()"></button>
+            </div>
+            <a ui-sref="login" class="button icon-right button-calm">logout</a>
+        </div>
+    <signed-in-footer></signed-in-footer>
 </body>
 
 </html>
