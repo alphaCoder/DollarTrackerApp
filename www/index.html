@@ -62,6 +62,39 @@
             <a ui-sref="login" class="button icon-right button-calm">logout</a>
         </div>
     <signed-in-footer></signed-in-footer>
+    <script id="templates/addModal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-calm">
+              <h1 class="title">Add Story</h1>
+              <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+              <div class="list">
+                <label class="item item-input">
+                  <span class="input-label">Name</span>
+                  <input ng-model="obj.name" type="text">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Date</span>
+                  <input ng-model="obj.date" type="text">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Place</span>
+                  <input ng-model="obj.place" type="text">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Amount</span>
+                  <input ng-model="obj.amount" type="text">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Comment</span>
+                  <input ng-model="obj.comment" type="text">
+                </label>
+                <button class="button button-full button-calm" ng-click="addItem(obj)">Save</button>
+              </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
 </body>
 
 </html>

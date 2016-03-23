@@ -13,9 +13,9 @@
 	        </ion-item>
 	        <!--Accordion content start-->
 	        <ion-item class="item-accordion"  ng-show="isGroupShown(group)">
-		        <ion-list can-swipe="true"><!--story.expenses-->
-				    <div class="card" ng-repeat="item in group.expenses track by $index" ng-show="isGroupShown(group)" style="margin-top:5px;margin-bottom:0px;">
-				    	<ion-item style="height:105px">
+		        <ion-list can-swipe="true"><!--story.expenses--><!--style="margin-top:5px;margin-bottom:0px;"-->
+				    <div class="card" ng-repeat="item in group.expenses track by $index" ng-show="isGroupShown(group)" >
+				    	<ion-item>
 							<dt-card></dt-card>
 							<ion-option-button class="button-assertive icon ion-edit" ng-click="modal.show(); setDataModal($index)"></ion-option-button>
 				        	<ion-option-button class="button-light icon ion-trash-a" ng-click="removeData($index)"></ion-option-button>
