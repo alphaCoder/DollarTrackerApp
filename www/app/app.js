@@ -102,7 +102,7 @@ angular.module('DollarTrackerApp', ['ui.router','ionic','ionic.utils','satellize
     angular.module(dollarTrackerAppName)
     .controller('mainCtrl', ['$scope','$ionicModal', mainCtrl]);
     function mainCtrl($scope,$ionicModal) {
-        $ionicModal.fromTemplateUrl('templates/modal.html', {
+        $ionicModal.fromTemplateUrl('templates/addModal.html', {
             scope: $scope
           }).then(function(modal) {
             $scope.modal = modal;
@@ -111,6 +111,20 @@ angular.module('DollarTrackerApp', ['ui.router','ionic','ionic.utils','satellize
           $scope.createContact = function(u) {        
             $scope.items.push({ name: u.itemName });
             $scope.modal.hide();
+          };
+
+          $scope.addItem = function(obj){
+            var story ={};
+            story = {"name":obj.name,
+            "expenses":[{
+                "date": obj.date,
+                "category": obj.category,
+                "amount": obj.amount,
+                "place": obj.place,
+                "comment": obj.comment
+              }]
+            };
+            console.log(story); //should do a http post method here to send that object to database
           };
     }
 
